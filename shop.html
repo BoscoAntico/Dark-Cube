@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Negozio - DarkCube</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+  <!-- HEADER -->
+  <header class="bg-gray-800 px-6 py-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold">DarkCube</h1>
+    <nav class="space-x-4 text-sm">
+      <a href="index.html" class="hover:text-cyan-400">Home</a>
+      <a href="rules.html" class="hover:text-cyan-400">Regole</a>
+      <a href="shop.html" class="text-cyan-400 font-semibold">Donazioni</a>
+      <a href="discord.html" class="hover:text-cyan-400">Discord</a>
+      <a href="status.html" class="hover:text-cyan-400">Stato</a>
+      <a href="staff.html" class="hover:text-cyan-400">Staff</a>
+      <a href="contact.html" class="hover:text-cyan-400">Contatti</a>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <div class="flex">
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-gray-800 p-4 border-r border-gray-700">
+      <h2 class="text-lg font-semibold mb-4">Modalità</h2>
+      <ul class="space-y-2">
+        <li><button onclick="selectMode('survival')" class="w-full text-left hover:text-cyan-400">🌲 Survival</button></li>
+        <li><button onclick="selectMode('skyblock')" class="w-full text-left hover:text-cyan-400">☁️ Skyblock</button></li>
+        <li><button onclick="selectMode('bedwars')" class="w-full text-left hover:text-cyan-400">🛏 BedWars</button></li>
+      </ul>
+    </aside>
+
+    <!-- SHOP AREA -->
+    <main class="flex-1 p-6">
+      <h2 class="text-3xl font-bold mb-6" id="shop-title">🌲 Survival - Negozio</h2>
+
+      <!-- FILTER BAR -->
+      <div class="flex justify-end space-x-4 mb-6">
+        <button onclick="filterCategory('rank')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Rank</button>
+        <button onclick="filterCategory('kit')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Kit</button>
+        <button onclick="filterCategory('casse')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Casse</button>
+        <button onclick="filterCategory('tutto')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Tutto</button>
+      </div>
+
+      <!-- SHOP ITEMS -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="shop-items">
+        <!-- Contenuto dinamico JS -->
+      </div>
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-800 text-center py-4 text-sm">
+    &copy; 2025 DarkCube. Tutti i diritti riservati.
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    const prodotti = {
+      survival: [
+        { tipo: 'rank', nome: 'VIP', prezzo: '5€', descrizione: 'Accesso a /kit vip e tag colorata' },
+        { tipo: 'kit', nome: 'Kit PvP', prezzo: '2€', descrizione: 'Armatura prot 2 + spada sharpness' },
+        { tipo: 'casse', nome: 'Cassa Magica', prezzo: '3€', descrizione: 'Contiene oggetti rari casuali' }
+      ],
+      skyblock: [
+        { tipo: 'rank', nome: 'SkyGod', prezzo: '7€', descrizione: 'Fly + /is upgrade + tag speciale' },
+        { tipo: 'kit', nome: 'Kit Inizio', prezzo: '1€', descrizione: 'Strumenti base e materiali iniziali' },
+        { tipo: 'casse', nome: 'SkyCrate', prezzo: '2.50€', descrizione: 'Premi unici per Skyblock' }
+      ],
+      bedwars: [
+        { tipo: 'rank', nome: 'Warrior', prezzo: '4€', descrizione: 'Tag + cosmetici esclusivi' },
+        { tipo: 'kit', nome: 'Kit Speed', prezzo: '1.50€', descrizione: 'Velocità aumentata e TNT extra' },
+        { tipo: 'casse', nome: 'BW LootBox', prezzo: '3€', descrizione: 'Contiene skin arco/spada' }
+      ]
+    };
+
+    let currentMode = 'survival';
+    let currentFilter = 'tutto';
+
+    function selectMode(mode) {
+      currentMode = mode;
+      document.getElementById("shop-title").innerText = {
+        survival: "🌲 Survival - Negozio",
+        skyblock: "☁️ Skyblock - Negozio",
+        bedwars: "🛏 BedWars - Negozio"
+      }[mode];
+      renderShop();
+    }
+
+    function filterCategory(cat) {
+      currentFilter = cat;
+      renderShop();
+    }
+
+    function renderShop() {
+      const container = document.getElementById("shop-items");
+      container.innerHTML = "";
+
+      const items = prodotti[currentMode].filter(p => currentFilter === 'tutto' || p.tipo === currentFilter);
+
+      items.forEach(p => {
+        const card = `
+          <div class="bg-gray-800 p-6 rounded-xl shadow hover:shadow-cyan-500/20 transition">
+            <h3 class="text-xl font-bold mb-2">${p.nome}</h3>
+            <p class="text-cyan-400 font-semibold mb-2">${p.prezzo}</p>
+            <p class="text-sm text-gray-300 mb-4">${p.descrizione}</p>
+            <button class="bg-cyan-600 px-4 py-2 rounded hover:bg-cyan-700">Acquista</button>
+          </div>`;
+        container.innerHTML += card;
+      });
+    }
+
+    // Avvio iniziale
+    renderShop();
+  </script>
+</body>
+</html>

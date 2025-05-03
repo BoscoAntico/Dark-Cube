@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stato Server - DarkCube</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-900 text-white font-sans">
+
+  <!-- HEADER -->
+  <header class="bg-gray-800 px-6 py-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold">DarkCube</h1>
+    <nav class="space-x-4 text-sm">
+      <a href="index.html" class="hover:text-cyan-400">Home</a>
+      <a href="rules.html" class="hover:text-cyan-400">Regole</a>
+      <a href="shop.html" class="hover:text-cyan-400">Donazioni</a>
+      <a href="discord.html" class="hover:text-cyan-400">Discord</a>
+      <a href="status.html" class="text-cyan-400 font-semibold">Stato</a>
+      <a href="staff.html" class="hover:text-cyan-400">Staff</a>
+      <a href="contact.html" class="hover:text-cyan-400">Contatti</a>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main class="p-6 max-w-4xl mx-auto text-center">
+    <h2 class="text-3xl font-bold mb-6">📡 Stato del Server</h2>
+
+    <div class="bg-gray-800 p-6 rounded-xl shadow-md">
+      <p class="text-xl mb-4">Server IP: <span class="font-mono text-cyan-400">dkminecraft.aternos.me</span></p>
+      <p class="text-lg mb-2">
+        <span id="status-indicator" class="inline-block w-4 h-4 rounded-full bg-yellow-400 mr-2"></span>
+        <span id="status-text" class="text-yellow-400 font-semibold">Caricamento...</span>
+      </p>
+      <p class="text-gray-300 mb-2">Giocatori connessi: <span id="players" class="text-white font-bold">--</span></p>
+      <p class="text-gray-400">Uptime: 24/7 (server host professionale)</p>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-800 text-center py-4 text-sm mt-10">
+    &copy; 2025 DarkCube. Tutti i diritti riservati.
+  </footer>
+
+  <!-- STATUS SCRIPT -->
+  <script>
+    const serverIP = "dkminecraft.aternos.me";
+
+    fetch(`https://mcapi.us/server/status?ip=${serverIP}`)
+      .then(response => response.json())
+      .then(data => {
+        const statusIndicator = document.getElementById("status-indicator");
+        const statusText = document.getElementById("status-text");
+        const players = document.getElementById("players");
+
+        if (data.online) {
+          statusIndicator.classList.remove("bg-yellow-400", "bg-red-500");
+          statusIndicator.classList.add("bg-green-500");
+          statusText.textContent = "Online";
+          statusText.className = "text-green-400 font-semibold";
+          players.textContent = `${data.players.now}/${data.players.max}`;
+        } else {
+          statusIndicator.classList.remove("bg-green-500", "bg-yellow-400");
+          statusIndicator.classList.add("bg-red-500");
+          statusText.textContent = "Offline";
+          statusText.className = "text-red-400 font-semibold";
+          players.textContent = "--";
+        }
+      })
+      .catch(() => {
+        const statusIndicator = document.getElementById("status-indicator");
+        const statusText = document.getElementById("status-text");
+        const players = document.getElementById("players");
+
+        statusIndicator.classList.remove("bg-green-500", "bg-red-500");
+        statusIndicator.classList.add("bg-yellow-400");
+        statusText.textContent = "Errore di rete";
+        statusText.className = "text-yellow-400 font-semibold";
+        players.textContent = "--";
+      });
+  </script>
+
+</body>
+</html>
