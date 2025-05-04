@@ -7,6 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-900 text-white font-sans">
+
   <!-- HEADER -->
   <header class="bg-gray-800 px-6 py-4 flex justify-between items-center">
     <h1 class="text-xl font-bold">DarkCube</h1>
@@ -21,7 +22,12 @@
     </nav>
   </header>
 
-  <!-- MAIN CONTENT -->
+  <!-- NICKNAME -->
+  <div class="bg-gray-800 p-4 flex justify-center items-center gap-4">
+    <label for="nickname">🎮 Nickname:</label>
+    <input id="nickname" type="text" class="bg-gray-700 px-3 py-1 rounded text-white" placeholder="Inserisci nickname">
+  </div>
+
   <div class="flex">
     <!-- SIDEBAR -->
     <aside class="w-64 bg-gray-800 p-4 border-r border-gray-700">
@@ -31,20 +37,13 @@
         <li><button onclick="selectMode('skyblock')" class="w-full text-left hover:text-cyan-400">☁️ Skyblock</button></li>
         <li><button onclick="selectMode('bedwars')" class="w-full text-left hover:text-cyan-400">🛏 BedWars</button></li>
       </ul>
-
-      <div class="mt-8">
-        <label class="text-sm block mb-2">🎮 Nickname Minecraft</label>
-        <input id="nickname" type="text" placeholder="Es. BoscoAntico" class="w-full p-2 rounded bg-gray-700 text-white mb-2">
-        <button onclick="saveNickname()" class="bg-cyan-600 hover:bg-cyan-700 px-4 py-1 rounded text-sm w-full">Salva</button>
-        <p id="nick-msg" class="text-green-400 text-xs mt-1 hidden">✅ Salvato!</p>
-      </div>
     </aside>
 
     <!-- SHOP AREA -->
     <main class="flex-1 p-6">
       <h2 class="text-3xl font-bold mb-6" id="shop-title">🌲 Survival - Negozio</h2>
 
-      <!-- FILTER BAR -->
+      <!-- FILTRI -->
       <div class="flex justify-end space-x-4 mb-6">
         <button onclick="filterCategory('rank')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Rank</button>
         <button onclick="filterCategory('kit')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Kit</button>
@@ -52,62 +51,44 @@
         <button onclick="filterCategory('tutto')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Tutto</button>
       </div>
 
-      <!-- SHOP ITEMS -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="shop-items">
-        <!-- Popolato da JS -->
-      </div>
-
-      <!-- CART -->
-      <div class="mt-10 bg-gray-800 p-4 rounded-xl shadow">
-        <h3 class="text-lg font-semibold mb-4">🧾 Carrello</h3>
-        <ul id="cart-items" class="text-sm space-y-2 text-gray-300"></ul>
-        <button onclick="clearCart()" class="mt-4 bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-sm">Svuota carrello</button>
-      </div>
+      <!-- PRODOTTI -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="shop-items"></div>
     </main>
+
+    <!-- CARRELLO -->
+    <aside class="w-80 bg-gray-800 p-4 border-l border-gray-700">
+      <h2 class="text-lg font-semibold mb-4">🛒 Carrello</h2>
+      <ul id="cart" class="space-y-4"></ul>
+    </aside>
   </div>
 
   <!-- FOOTER -->
-  <footer class="bg-gray-800 text-center py-4 text-sm">
+  <footer class="bg-gray-800 text-center py-4 text-sm mt-10">
     &copy; 2025 DarkCube. Tutti i diritti riservati.
   </footer>
 
-  <!-- SCRIPT -->
   <script>
     const prodotti = {
       survival: [
         { tipo: 'rank', nome: 'VIP', prezzo: '5€', descrizione: 'Accesso a /kit vip e tag colorata' },
         { tipo: 'kit', nome: 'Kit PvP', prezzo: '2€', descrizione: 'Armatura prot 2 + spada sharpness' },
-        { tipo: 'casse', nome: 'Cassa Magica', prezzo: '3€', descrizione: 'Contiene oggetti rari casuali' }
+        { tipo: 'casse', nome: 'Key Magica', prezzo: '3€', descrizione: 'Oggetti casuali OP' }
       ],
       skyblock: [
-        { tipo: 'rank', nome: 'SkyGod', prezzo: '7€', descrizione: 'Fly + /is upgrade + tag speciale' },
+        { tipo: 'rank', nome: 'SkyGod', prezzo: '7€', descrizione: 'Fly + upgrade + tag' },
         { tipo: 'kit', nome: 'Kit Inizio', prezzo: '1€', descrizione: 'Strumenti base e materiali iniziali' },
-        { tipo: 'casse', nome: 'SkyCrate', prezzo: '2.50€', descrizione: 'Premi unici per Skyblock' }
+        { tipo: 'casse', nome: 'SkyCrate', prezzo: '2.5€', descrizione: 'Premi unici per Skyblock' }
       ],
       bedwars: [
-        { tipo: 'rank', nome: 'Warrior', prezzo: '4€', descrizione: 'Tag + cosmetici esclusivi' },
-        { tipo: 'kit', nome: 'Kit Speed', prezzo: '1.50€', descrizione: 'Velocità aumentata e TNT extra' },
-        { tipo: 'casse', nome: 'BW LootBox', prezzo: '3€', descrizione: 'Contiene skin arco/spada' }
+        { tipo: 'rank', nome: 'Warrior', prezzo: '4€', descrizione: 'Tag + cosmetici' },
+        { tipo: 'kit', nome: 'Kit Speed', prezzo: '1.5€', descrizione: 'Velocità aumentata' },
+        { tipo: 'casse', nome: 'BW LootBox', prezzo: '3€', descrizione: 'Skin arco/spada' }
       ]
     };
 
     let currentMode = 'survival';
     let currentFilter = 'tutto';
-
-    function saveNickname() {
-      const nick = document.getElementById("nickname").value.trim();
-      if (nick) {
-        localStorage.setItem("minecraft_nick", nick);
-        document.getElementById("nick-msg").classList.remove("hidden");
-        setTimeout(() => {
-          document.getElementById("nick-msg").classList.add("hidden");
-        }, 2000);
-      }
-    }
-
-    function getNickname() {
-      return localStorage.getItem("minecraft_nick") || "";
-    }
+    const cart = [];
 
     function selectMode(mode) {
       currentMode = mode;
@@ -129,65 +110,80 @@
       container.innerHTML = "";
 
       const items = prodotti[currentMode].filter(p => currentFilter === 'tutto' || p.tipo === currentFilter);
-
-      items.forEach(p => {
+      items.forEach((p, index) => {
         const card = `
           <div class="bg-gray-800 p-6 rounded-xl shadow hover:shadow-cyan-500/20 transition">
             <h3 class="text-xl font-bold mb-2">${p.nome}</h3>
             <p class="text-cyan-400 font-semibold mb-2">${p.prezzo}</p>
             <p class="text-sm text-gray-300 mb-4">${p.descrizione}</p>
-            <button onclick="addToCart('${p.nome}', '${p.prezzo}')" class="bg-cyan-600 px-4 py-2 rounded hover:bg-cyan-700">Aggiungi al carrello</button>
+            <button onclick="addToCart('${p.nome}', '${p.tipo}', '${p.prezzo}')" class="bg-cyan-600 px-4 py-2 rounded hover:bg-cyan-700">Aggiungi</button>
           </div>`;
         container.innerHTML += card;
       });
     }
 
-    function addToCart(nome, prezzo) {
-      const nick = getNickname();
-      if (!nick) {
-        alert("Inserisci prima il tuo nickname!");
-        return;
+    function addToCart(nome, tipo, prezzo) {
+      const nick = document.getElementById("nickname").value.trim();
+      if (!nick) return alert("Inserisci prima il tuo nickname!");
+
+      const key = `${nick}_${nome}`;
+      const now = Date.now();
+      const cooldowns = {
+        rank: 999999999, // solo una volta
+        kit: 999999999,
+        casse: 12 * 60 * 60 * 1000,
+        lootbox: 55 * 60 * 1000
+      };
+      const limits = {
+        casse: 15,
+        lootbox: 5
+      };
+
+      const record = JSON.parse(localStorage.getItem(key)) || { count: 0, last: 0 };
+
+      const isLimited = tipo === "casse" || tipo === "lootbox";
+      const limit = limits[tipo] || 1;
+      const cooldown = cooldowns[tipo] || 0;
+
+      if (record.count >= limit) {
+        const timePassed = now - record.last;
+        const remaining = cooldown - timePassed;
+        if (remaining > 0) {
+          const mins = Math.floor(remaining / 60000);
+          return alert(`⏳ Aspetta ancora ${mins} minuti prima di acquistare di nuovo ${nome}.`);
+        } else {
+          record.count = 0;
+        }
       }
-      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-      cart.push({ prodotto: nome, prezzo, nick });
-      localStorage.setItem("cart", JSON.stringify(cart));
-      renderCart();
+
+      // Salva nuovo acquisto
+      record.count += 1;
+      record.last = now;
+      localStorage.setItem(key, JSON.stringify(record));
+
+      cart.push({ nome, prezzo });
+      updateCart();
     }
 
-    function renderCart() {
-      const cartList = document.getElementById("cart-items");
-      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-      cartList.innerHTML = "";
+    function updateCart() {
+      const cartContainer = document.getElementById("cart");
+      cartContainer.innerHTML = "";
 
       cart.forEach((item, index) => {
-        const li = document.createElement("li");
-        li.innerHTML = `
-          <div class="flex justify-between items-center bg-gray-700 px-4 py-2 rounded">
-            <span>🎁 ${item.prodotto} - ${item.prezzo} (per ${item.nick})</span>
-            <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-600">Rimuovi</button>
-          </div>`;
-        cartList.appendChild(li);
+        cartContainer.innerHTML += `
+          <li class="flex justify-between items-center bg-gray-700 p-3 rounded">
+            <span>${item.nome} - ${item.prezzo}</span>
+            <button onclick="removeFromCart(${index})" class="text-red-400 hover:underline">Rimuovi</button>
+          </li>`;
       });
     }
 
     function removeFromCart(index) {
-      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
       cart.splice(index, 1);
-      localStorage.setItem("cart", JSON.stringify(cart));
-      renderCart();
+      updateCart();
     }
 
-    function clearCart() {
-      localStorage.removeItem("cart");
-      renderCart();
-    }
-
-    // Avvio
-    document.addEventListener("DOMContentLoaded", () => {
-      renderShop();
-      renderCart();
-      document.getElementById("nickname").value = getNickname();
-    });
+    renderShop();
   </script>
 </body>
 </html>
