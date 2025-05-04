@@ -10,4 +10,103 @@
 
   <!-- HEADER -->
   <header class="bg-gray-800 px-6 py-4 flex justify-between items-center">
-    <h1 class="text-xl font-bold">
+    <h1 class="text-xl font-bold">DarkCube</h1>
+    <nav class="space-x-4 text-sm">
+      <a href="index.html" class="hover:text-cyan-400">Home</a>
+      <a href="rules.html" class="hover:text-cyan-400">Regole</a>
+      <a href="shop.html" class="text-cyan-400 font-semibold">Shop</a>
+      <a href="discord.html" class="hover:text-cyan-400">Discord</a>
+      <a href="status.html" class="hover:text-cyan-400">Stato</a>
+      <a href="staff.html" class="hover:text-cyan-400">Staff</a>
+      <a href="contact.html" class="hover:text-cyan-400">Contatti</a>
+    </nav>
+  </header>
+
+  <!-- SHOP MAIN -->
+  <main class="p-6 max-w-6xl mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-8">🛒 Shop DarkCube</h2>
+    <p class="text-center text-gray-400 mb-6">Tutti i prezzi sono <strong>IVA inclusa (22%)</strong>.</p>
+
+    <!-- RANKS -->
+    <section class="mb-12">
+      <h3 class="text-2xl font-bold mb-4">🏅 Rank</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-gray-800 p-6 rounded-xl shadow">
+          <h4 class="text-xl font-semibold mb-2">Novizio</h4>
+          <p class="text-cyan-400 text-lg mb-2">5.00€ IVA incl.</p>
+          <p class="text-sm text-gray-300 mb-4">Accesso base, comandi /kit e /spawn.</p>
+          <button class="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded">Acquista</button>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-xl shadow">
+          <h4 class="text-xl font-semibold mb-2">Avventuriero</h4>
+          <p class="text-cyan-400 text-lg mb-2">10.00€ IVA incl.</p>
+          <p class="text-sm text-gray-300 mb-4">+ Kit esclusivo, accesso al /warp vip.</p>
+          <button class="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded">Acquista</button>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-xl shadow">
+          <h4 class="text-xl font-semibold mb-2">Leggendario</h4>
+          <p class="text-cyan-400 text-lg mb-2">20.00€ IVA incl.</p>
+          <p class="text-sm text-gray-300 mb-4">Tutti i privilegi, chat colorata, nickname.</p>
+          <button class="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded">Acquista</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- KITS -->
+    <section class="mb-12">
+      <h3 class="text-2xl font-bold mb-4">🧰 Kit</h3>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-gray-800 p-6 rounded-xl shadow">
+          <h4 class="text-xl font-semibold mb-2">Kit PvP Settimanale</h4>
+          <p class="text-cyan-400 text-lg mb-2">3.05€ IVA incl.</p>
+          <p class="text-sm text-gray-300 mb-4">Armi, armatura, pozioni pronte all'uso.</p>
+          <button class="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded">Acquista</button>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-xl shadow">
+          <h4 class="text-xl font-semibold mb-2">Kit Miner</h4>
+          <p class="text-cyan-400 text-lg mb-2">2.99€ IVA incl.</p>
+          <p class="text-sm text-gray-300 mb-4">Picconi, torce, cibo e altri strumenti base.</p>
+          <button class="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded">Acquista</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOOTBOX -->
+    <section class="mb-12">
+      <h3 class="text-2xl font-bold mb-4">🎁 Lootbox</h3>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-gray-800 p-6 rounded-xl shadow">
+          <h4 class="text-xl font-semibold mb-2">Cassa Rara</h4>
+          <p class="text-cyan-400 text-lg mb-2">2.49€ IVA incl.</p>
+          <p class="text-sm text-gray-300 mb-4">Contiene ricompense casuali rare.</p>
+          <button class="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded">Acquista</button>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-xl shadow">
+          <h4 class="text-xl font-semibold mb-2">Cassa Epica</h4>
+          <p class="text-cyan-400 text-lg mb-2">5.00€ IVA incl.</p>
+          <p class="text-sm text-gray-300 mb-4">Ricompense leggendarie e materiali rari.</p>
+          <button class="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded">Acquista</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- BUNDLES -->
+    <section class="mb-12">
+      <h3 class="text-2xl font-bold mb-4">🎮 Bundle</h3>
+      <div class="bg-gray-800 p-6 rounded-xl shadow">
+        <h4 class="text-xl font-semibold mb-2">Pacchetto Inizio + Rank</h4>
+        <p class="text-cyan-400 text-lg mb-2">15.00€ IVA incl.</p>
+        <p class="text-sm text-gray-300 mb-4">Rank Novizio + Kit PvP + 1 lootbox rara.</p>
+        <button class="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded">Acquista</button>
+      </div>
+    </section>
+
+    <p class="text-gray-500 text-center mt-8">⚠️ Gli acquisti sono digitali e non rimborsabili. Riceverai tutto direttamente in-game.</p>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-800 text-center py-4 text-sm mt-10">
+    &copy; 2025 DarkCube. Tutti i diritti riservati.
+  </footer>
+</body>
+</html>
