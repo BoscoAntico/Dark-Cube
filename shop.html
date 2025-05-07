@@ -48,6 +48,7 @@
         <button onclick="filterCategory('rank')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Rank</button>
         <button onclick="filterCategory('kit')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Kit</button>
         <button onclick="filterCategory('casse')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Casse</button>
+        <button onclick="filterCategory('key')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">key</button>
         <button onclick="filterCategory('tutto')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Tutto</button>
       </div>
 
@@ -70,19 +71,17 @@
   <script>
     const prodotti = {
       survival: [
-        { tipo: 'rank', nome: 'VIP', prezzo: '5€', descrizione: 'Accesso a /kit vip e tag colorata' },
-        { tipo: 'kit', nome: 'Kit PvP', prezzo: '2€', descrizione: 'Armatura prot 2 + spada sharpness' },
-        { tipo: 'casse', nome: 'Key Magica', prezzo: '3€', descrizione: 'Oggetti casuali OP' }
+        { tipo: 'kit', nome: 'Cavagliere', prezzo: '21€', descrizione: 'Armatura del cavagliere prot 3 + spada del cavagliere con Sharpnes 4 e Rispingi. Tag Colorata' },
+        { tipo: 'key', nome: 'Key rara', prezzo: '3€', descrizione: 'Oggetti casuali' },
+        { tipo: 'key', nome: 'Key non comune', prezzo: '7€', descrizione: 'Oggetti casuali + key Leggendaria + spawner comuni' },
+        { tipo: 'key', nome: 'Key Leggendaria', prezzo: '9€', descrizione: 'Oggetti casuali OP + key mitica + spawner epico' }
       ],
       skyblock: [
-        { tipo: 'rank', nome: 'SkyGod', prezzo: '7€', descrizione: 'Fly + upgrade + tag' },
-        { tipo: 'kit', nome: 'Kit Inizio', prezzo: '1€', descrizione: 'Strumenti base e materiali iniziali' },
-        { tipo: 'casse', nome: 'SkyCrate', prezzo: '2.5€', descrizione: 'Premi unici per Skyblock' }
+        { tipo: 'kit', nome: 'Kit Vip+', prezzo: '7€', descrizione: 'Strumenti base e materiali iniziali Fly + upgrade + tag' },
+        { tipo: 'casse', nome: 'Sky LootBox, prezzo: '4.5€', descrizione: 'Premi unici per Skyblock' }
       ],
       bedwars: [
-        { tipo: 'rank', nome: 'Warrior', prezzo: '4€', descrizione: 'Tag + cosmetici' },
-        { tipo: 'kit', nome: 'Kit Speed', prezzo: '1.5€', descrizione: 'Velocità aumentata' },
-        { tipo: 'casse', nome: 'BW LootBox', prezzo: '3€', descrizione: 'Skin arco/spada' }
+        { tipo: 'rank', nome: 'BwVip', prezzo: '15€', descrizione: 'Tag + cosmetici' },
       ]
     };
 
