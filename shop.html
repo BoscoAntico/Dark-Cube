@@ -5,11 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Negozio - DarkCube</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .desc-short { max-height: 3.5em; overflow: hidden; }
-  </style>
 </head>
-<body class="bg-gray-900 text-white font-sans">
+<body class="bg-gray-900 text-white font-sans min-h-screen flex flex-col">
 
   <!-- HEADER -->
   <header class="bg-gray-800 px-6 py-4 flex justify-between items-center">
@@ -25,63 +22,69 @@
     </nav>
   </header>
 
-  <!-- NICKNAME -->
-  <div class="bg-gray-800 p-4 flex justify-center items-center gap-4">
-    <label for="nickname">🎮 Nickname:</label>
-    <input id="nickname" type="text" class="bg-gray-700 px-3 py-1 rounded text-white" placeholder="Inserisci nickname">
-  </div>
+  <!-- CONTENUTO -->
+  <div class="flex-1">
+    <!-- NICKNAME -->
+    <div class="bg-gray-800 p-4 flex justify-center items-center gap-4">
+      <label for="nickname">🎮 Nickname:</label>
+      <input id="nickname" type="text" class="bg-gray-700 px-3 py-1 rounded text-white" placeholder="Inserisci nickname">
+    </div>
 
-  <div class="flex">
-    <!-- SIDEBAR -->
-    <aside class="w-64 bg-gray-800 p-4 border-r border-gray-700 space-y-4">
-      <h2 class="text-lg font-semibold mb-2">Modalità</h2>
-      <ul class="space-y-2">
-        <li><button onclick="selectMode('survival')" class="w-full flex items-center gap-2 hover:text-cyan-400"><img src="https://example.com/survival.png" class="w-5 h-5"> 🌲 Survival</button></li>
-        <li><button onclick="selectMode('skyblock')" class="w-full flex items-center gap-2 hover:text-cyan-400"><img src="https://example.com/skyblock.png" class="w-5 h-5"> ☁️ Skyblock</button></li>
-        <li><button onclick="selectMode('bedwars')" class="w-full flex items-center gap-2 hover:text-cyan-400"><img src="https://example.com/bedwars.png" class="w-5 h-5"> 🛏 BedWars</button></li>
-      </ul>
-    </aside>
+    <div class="flex">
+      <!-- SIDEBAR -->
+      <aside class="w-64 bg-gray-800 p-4 border-r border-gray-700">
+        <h2 class="text-lg font-semibold mb-4">Modalità</h2>
+        <ul class="space-y-2">
+          <li><button onclick="selectMode('survival')" class="w-full text-left hover:text-cyan-400">🌲 Survival</button></li>
+          <li><button onclick="selectMode('skyblock')" class="w-full text-left hover:text-cyan-400">☁️ Skyblock</button></li>
+          <li><button onclick="selectMode('bedwars')" class="w-full text-left hover:text-cyan-400">🛏 BedWars</button></li>
+        </ul>
+      </aside>
 
-    <!-- SHOP -->
-    <main class="flex-1 p-6">
-      <h2 class="text-3xl font-bold mb-6" id="shop-title">🌲 Survival - Negozio</h2>
+      <!-- SHOP AREA -->
+      <main class="flex-1 p-6">
+        <h2 class="text-3xl font-bold mb-6" id="shop-title">🌲 Survival - Negozio</h2>
 
-      <div class="flex justify-end space-x-4 mb-6">
-        <button onclick="filterCategory('rank')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Rank</button>
-        <button onclick="filterCategory('kit')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Kit</button>
-        <button onclick="filterCategory('casse')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Casse</button>
-        <button onclick="filterCategory('key')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Key</button>
-        <button onclick="filterCategory('tutto')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Tutto</button>
-      </div>
+        <!-- FILTRI -->
+        <div class="flex justify-end space-x-4 mb-6">
+          <button onclick="filterCategory('rank')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Rank</button>
+          <button onclick="filterCategory('kit')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Kit</button>
+          <button onclick="filterCategory('casse')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Casse</button>
+          <button onclick="filterCategory('key')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Key</button>
+          <button onclick="filterCategory('tutto')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Tutto</button>
+        </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="shop-items"></div>
-    </main>
+        <!-- PRODOTTI -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="shop-items"></div>
+      </main>
 
-    <!-- CARRELLO -->
-    <aside class="w-80 bg-gray-800 p-4 border-l border-gray-700 max-h-[85vh] overflow-y-auto">
-      <h2 class="text-lg font-semibold mb-4">🛒 Carrello</h2>
-      <ul id="cart" class="space-y-4"></ul>
-    </aside>
+      <!-- CARRELLO -->
+      <aside class="w-80 bg-gray-800 p-4 border-l border-gray-700 overflow-y-auto max-h-[80vh]">
+        <h2 class="text-lg font-semibold mb-4">🛒 Carrello</h2>
+        <ul id="cart" class="space-y-4"></ul>
+      </aside>
+    </div>
   </div>
 
   <!-- FOOTER -->
-  <footer class="bg-gray-800 text-center py-4 text-sm mt-10">
+  <footer class="bg-gray-800 text-center py-4 text-sm border-t border-gray-700">
     © 2025 DarkCube. Tutti i diritti riservati.
   </footer>
 
   <script>
     const prodotti = {
       survival: [
-        { tipo: 'kit', nome: 'Cavaliere', prezzo: '21€', descrizione: 'Armatura del cavaliere prot 3 + spada del cavaliere con Sharpness 4 e Rispinta. Tag colorata.', immagine: 'https://example.com/cavaliere.png' },
-        { tipo: 'key', nome: 'Key Rara', prezzo: '3€', descrizione: 'Oggetti casuali con possibilità di trovare premi rari.', immagine: 'https://example.com/key1.png' },
-        { tipo: 'key', nome: 'Key Leggendaria', prezzo: '9€', descrizione: 'Oggetti casuali OP + key mitica + spawner epico.', immagine: 'https://example.com/key2.png' }
+        { tipo: 'kit', nome: 'Cavagliere', prezzo: '21€', descrizione: 'Armatura del cavagliere prot 3 + spada del cavagliere con Sharpnes 4 e Rispingi. Tag Colorata' },
+        { tipo: 'key', nome: 'Key rara', prezzo: '3€', descrizione: 'Oggetti casuali' },
+        { tipo: 'key', nome: 'Key non comune', prezzo: '7€', descrizione: 'Oggetti casuali + key Leggendaria + spawner comuni' },
+        { tipo: 'key', nome: 'Key Leggendaria', prezzo: '9€', descrizione: 'Oggetti casuali OP + key mitica + spawner epico' }
       ],
       skyblock: [
-        { tipo: 'kit', nome: 'Kit Vip+', prezzo: '7€', descrizione: 'Strumenti base, fly, materiali iniziali e tag.', immagine: 'https://example.com/vipkit.png' },
-        { tipo: 'casse', nome: 'Sky LootBox', prezzo: '4.5€', descrizione: 'Premi unici per Skyblock.', immagine: 'https://example.com/skyloot.png' }
+        { tipo: 'kit', nome: 'Kit Vip+', prezzo: '7€', descrizione: 'Strumenti base e materiali iniziali Fly + upgrade + tag' },
+        { tipo: 'casse', nome: 'Sky LootBox', prezzo: '4.5€', descrizione: 'Premi unici per Skyblock' }
       ],
       bedwars: [
-        { tipo: 'rank', nome: 'BwVip', prezzo: '15€', descrizione: 'Tag + cosmetici esclusivi per BedWars.', immagine: 'https://example.com/bwvip.png' }
+        { tipo: 'rank', nome: 'BwVip', prezzo: '15€', descrizione: 'Tag + cosmetici' },
       ]
     };
 
@@ -109,53 +112,74 @@
       container.innerHTML = "";
 
       const items = prodotti[currentMode].filter(p => currentFilter === 'tutto' || p.tipo === currentFilter);
-      items.forEach((p, i) => {
-        const card = document.createElement("div");
-        card.className = "bg-gray-800 p-6 rounded-xl shadow hover:shadow-cyan-500/20 transition";
-
-        card.innerHTML = `
-          <img src="${p.immagine}" alt="${p.nome}" class="w-full h-40 object-contain mb-4 rounded" />
-          <h3 class="text-xl font-bold mb-1">${p.nome}</h3>
-          <p class="text-cyan-400 font-semibold mb-2">${p.prezzo}</p>
-          <p class="text-sm text-gray-300 desc-short" id="desc-${i}">${p.descrizione}</p>
-          <button onclick="toggleDesc(${i})" class="text-xs text-cyan-300 hover:underline mb-3">Mostra di più</button>
-          <button onclick="addToCart('${p.nome}', '${p.tipo}', '${p.prezzo}')" class="bg-cyan-600 px-4 py-2 rounded hover:bg-cyan-700">Aggiungi</button>
-        `;
-
-        container.appendChild(card);
+      items.forEach((p, index) => {
+        const card = `
+          <div class="bg-gray-800 p-6 rounded-xl shadow hover:shadow-cyan-500/20 transition">
+            <h3 class="text-xl font-bold mb-2">${p.nome}</h3>
+            <p class="text-cyan-400 font-semibold mb-2">${p.prezzo}</p>
+            <p class="text-sm text-gray-300 mb-4">${p.descrizione}</p>
+            <button onclick="addToCart('${p.nome}', '${p.tipo}', '${p.prezzo}')" class="bg-cyan-600 px-4 py-2 rounded hover:bg-cyan-700">Aggiungi</button>
+          </div>`;
+        container.innerHTML += card;
       });
-    }
-
-    function toggleDesc(i) {
-      const p = document.getElementById(`desc-${i}`);
-      p.classList.toggle("desc-short");
-      const btn = p.nextElementSibling;
-      btn.textContent = p.classList.contains("desc-short") ? "Mostra di più" : "Mostra di meno";
     }
 
     function addToCart(nome, tipo, prezzo) {
       const nick = document.getElementById("nickname").value.trim();
       if (!nick) return alert("Inserisci prima il tuo nickname!");
 
-      const item = cart.find(p => p.nome === nome);
-      if (item) {
-        item.quantità++;
+      const key = `${nick}_${nome}`;
+      const now = Date.now();
+      const cooldowns = {
+        rank: 999999999,
+        kit: 999999999,
+        casse: 12 * 60 * 60 * 1000,
+        lootbox: 55 * 60 * 1000
+      };
+      const limits = {
+        casse: 15,
+        lootbox: 5
+      };
+
+      const record = JSON.parse(localStorage.getItem(key)) || { count: 0, last: 0 };
+
+      const isLimited = tipo === "casse" || tipo === "lootbox";
+      const limit = limits[tipo] || 1;
+      const cooldown = cooldowns[tipo] || 0;
+
+      if (record.count >= limit) {
+        const timePassed = now - record.last;
+        const remaining = cooldown - timePassed;
+        if (remaining > 0) {
+          const mins = Math.floor(remaining / 60000);
+          return alert(`⏳ Aspetta ancora ${mins} minuti prima di acquistare di nuovo ${nome}.`);
+        } else {
+          record.count = 0;
+        }
+      }
+
+      record.count += 1;
+      record.last = now;
+      localStorage.setItem(key, JSON.stringify(record));
+
+      const existing = cart.find(item => item.nome === nome);
+      if (existing) {
+        existing.quantità += 1;
       } else {
         cart.push({ nome, prezzo, quantità: 1 });
       }
-
       updateCart();
     }
 
     function updateCart() {
-      const container = document.getElementById("cart");
-      container.innerHTML = "";
+      const cartContainer = document.getElementById("cart");
+      cartContainer.innerHTML = "";
 
-      cart.forEach((item, i) => {
-        container.innerHTML += `
+      cart.forEach((item, index) => {
+        cartContainer.innerHTML += `
           <li class="flex justify-between items-center bg-gray-700 p-3 rounded">
             <span>${item.nome} x${item.quantità} - ${item.prezzo}</span>
-            <button onclick="removeFromCart(${i})" class="text-red-400 hover:underline">Rimuovi</button>
+            <button onclick="removeFromCart(${index})" class="text-red-400 hover:underline">Rimuovi</button>
           </li>`;
       });
     }
