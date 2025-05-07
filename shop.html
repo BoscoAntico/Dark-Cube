@@ -1,3 +1,4 @@
+<!-- Corretto HTML completo -->
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -6,7 +7,7 @@
   <title>Negozio - DarkCube</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-900 text-white font-sans">
+<body class="bg-gray-900 text-white font-sans flex flex-col min-h-screen">
 
   <!-- HEADER -->
   <header class="bg-gray-800 px-6 py-4 flex justify-between items-center">
@@ -28,7 +29,7 @@
     <input id="nickname" type="text" class="bg-gray-700 px-3 py-1 rounded text-white" placeholder="Inserisci nickname">
   </div>
 
-  <div class="flex">
+  <div class="flex flex-grow">
     <!-- SIDEBAR -->
     <aside class="w-64 bg-gray-800 p-4 border-r border-gray-700">
       <h2 class="text-lg font-semibold mb-4">Modalità</h2>
@@ -48,7 +49,7 @@
         <button onclick="filterCategory('rank')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Rank</button>
         <button onclick="filterCategory('kit')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Kit</button>
         <button onclick="filterCategory('casse')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Casse</button>
-        <button onclick="filterCategory('key')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">key</button>
+        <button onclick="filterCategory('key')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Key</button>
         <button onclick="filterCategory('tutto')" class="bg-gray-700 px-4 py-2 rounded hover:bg-cyan-500">Tutto</button>
       </div>
 
@@ -64,24 +65,24 @@
   </div>
 
   <!-- FOOTER -->
-  <footer class="bg-gray-800 text-center py-4 text-sm mt-10">
+  <footer class="bg-gray-800 text-center py-4 text-sm">
     &copy; 2025 DarkCube. Tutti i diritti riservati.
   </footer>
 
   <script>
     const prodotti = {
       survival: [
-        { tipo: 'kit', nome: 'Cavagliere', prezzo: '21€', descrizione: 'Armatura del cavagliere prot 3 + spada del cavagliere con Sharpnes 4 e Rispingi. Tag Colorata' },
+        { tipo: 'kit', nome: 'Cavagliere', prezzo: '21€', descrizione: 'Armatura del cavagliere prot 3 + spada del cavagliere con Sharpness 4 e Rispingi. Tag Colorata' },
         { tipo: 'key', nome: 'Key rara', prezzo: '3€', descrizione: 'Oggetti casuali' },
         { tipo: 'key', nome: 'Key non comune', prezzo: '7€', descrizione: 'Oggetti casuali + key Leggendaria + spawner comuni' },
         { tipo: 'key', nome: 'Key Leggendaria', prezzo: '9€', descrizione: 'Oggetti casuali OP + key mitica + spawner epico' }
       ],
       skyblock: [
         { tipo: 'kit', nome: 'Kit Vip+', prezzo: '7€', descrizione: 'Strumenti base e materiali iniziali Fly + upgrade + tag' },
-        { tipo: 'casse', nome: 'Sky LootBox, prezzo: '4.5€', descrizione: 'Premi unici per Skyblock' }
+        { tipo: 'casse', nome: 'Sky LootBox', prezzo: '4.5€', descrizione: 'Premi unici per Skyblock' }
       ],
       bedwars: [
-        { tipo: 'rank', nome: 'BwVip', prezzo: '15€', descrizione: 'Tag + cosmetici' },
+        { tipo: 'rank', nome: 'BwVip', prezzo: '15€', descrizione: 'Tag + cosmetici' }
       ]
     };
 
@@ -113,7 +114,7 @@
         const card = `
           <div class="bg-gray-800 p-6 rounded-xl shadow hover:shadow-cyan-500/20 transition">
             <h3 class="text-xl font-bold mb-2">${p.nome}</h3>
-            <p class="text-cyan-400 font-semibold mb-2">${p.prezzo}</p>
+            <p class="text-cyan-400 font-semibold mb-2 text-lg">💰 ${p.prezzo}</p>
             <p class="text-sm text-gray-300 mb-4">${p.descrizione}</p>
             <button onclick="addToCart('${p.nome}', '${p.tipo}', '${p.prezzo}')" class="bg-cyan-600 px-4 py-2 rounded hover:bg-cyan-700">Aggiungi</button>
           </div>`;
@@ -128,7 +129,7 @@
       const key = `${nick}_${nome}`;
       const now = Date.now();
       const cooldowns = {
-        rank: 999999999, // solo una volta
+        rank: 999999999,
         kit: 999999999,
         casse: 12 * 60 * 60 * 1000,
         lootbox: 55 * 60 * 1000
@@ -139,7 +140,6 @@
       };
 
       const record = JSON.parse(localStorage.getItem(key)) || { count: 0, last: 0 };
-
       const isLimited = tipo === "casse" || tipo === "lootbox";
       const limit = limits[tipo] || 1;
       const cooldown = cooldowns[tipo] || 0;
@@ -155,7 +155,6 @@
         }
       }
 
-      // Salva nuovo acquisto
       record.count += 1;
       record.last = now;
       localStorage.setItem(key, JSON.stringify(record));
