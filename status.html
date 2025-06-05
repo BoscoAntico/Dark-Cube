@@ -28,7 +28,7 @@
     <h2 class="text-3xl font-bold mb-6">📡 Stato del Server</h2>
 
     <div class="bg-gray-800 p-6 rounded-xl shadow-md">
-      <p class="text-xl mb-4">Server IP: <span class="font-mono text-cyan-400">dkminecraft.aternos.me</span></p>
+      <p class="text-xl mb-4">Server IP: <span class="font-mono text-cyan-400">darkcubemc.aternos.me</span></p>
       <p class="text-lg mb-2">
         <span id="status-indicator" class="inline-block w-4 h-4 rounded-full bg-yellow-400 mr-2"></span>
         <span id="status-text" class="text-yellow-400 font-semibold">Caricamento...</span>
@@ -45,7 +45,7 @@
 
   <!-- STATUS SCRIPT -->
   <script>
-    const serverIP = "dkminecraft.aternos.me";
+    const serverIP = "darkcubemc.aternos.me";
 
     fetch(`https://mcapi.us/server/status?ip=${serverIP}`)
       .then(response => response.json())
